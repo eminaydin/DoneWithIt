@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableNativeFeedback, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableNativeFeedback, TouchableHighlight, Button, Alert } from 'react-native';
 
 export default function App() {
   const handlePress = () => {
@@ -20,6 +20,8 @@ export default function App() {
         }>
         <Image source={{ width: 200, height: 200, uri: "https://picsum.photos/200/300" }} />
       </TouchableHighlight>
+      <Button title="click me" onPress={() => Alert.prompt("My title", "My message", text => console.log(text)
+      )} />
     </View>
   );
 }
