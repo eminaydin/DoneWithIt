@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableNativeFeedback, TouchableHighlight, Button, Alert, Platform, SafeAreaView, StatusBar, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableNativeFeedback, TouchableHighlight, Button, Alert, Platform, SafeAreaView, StatusBar, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -23,9 +23,9 @@ export default function App() {
 
       <Button title="click me" onPress={
         goalSubmitHandler} />
-      <View>
+      <ScrollView>
         {courseGoals.map((goals) => <Text>{goals} </Text>)}
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
