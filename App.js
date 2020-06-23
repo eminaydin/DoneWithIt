@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableNativeFeedbac
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
-
+  const [courseGoals, setCourseGoals] = useState([]);
   const handlePress = () => {
     console.log("clicked");
 
@@ -12,13 +12,20 @@ export default function App() {
   function goalInputHandler(enteredText) {
     setEnteredGoal(enteredText)
   }
+  function goalSubmitHandler() {
+    setCourseGoals([...courseGoals, enteredGoal])
+
+  }
   return (
     <SafeAreaView style={styles.container}>
       <Text numberOfLines={1} onPress={handlePress} >Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis soluta aut pariatur sed, deserunt architecto, commodi voluptas omnis, a debitis dolore provident quos illo eligendi eaque repellendus fuga quo corporis facilis? Aliquam, natus. Ipsum facilis placeat repellendus qui nobis, laudantium rem at? Qui ducimus laborum eveniet. Enim neque tempora iusto!</Text>
-      <TextInput placeholder="Course Goal" onChangeText={goalInputHandler} />
+      <TextInput style={styles.input} placeholder="Course Goal" onChangeText={goalInputHandler} value={enteredGoal} />
 
-      <Button title="click me" onPress={() => Alert.prompt("My title", "My message", text => console.log(text)
-      )} />
+      <Button title="click me" onPress={
+        goalSubmitHandler} />
+      <View>
+        {courseGoals.map((goals) => <Text>{goals} </Text>)}
+      </View>
     </SafeAreaView>
   );
 }
@@ -30,4 +37,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: Platform.OS === "android" ? StatusBar.currentHeight : 0
   },
+  input: {
+    width: 2000,
+    borderWidth: 2,
+    borderColor: "blue"
+  }
 });
