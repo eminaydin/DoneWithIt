@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableNativeFeedback, TouchableHighlight, Button, Alert, Platform, SafeAreaView, StatusBar, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableNativeFeedback, TouchableHighlight, Button, Alert, Platform, SafeAreaView, StatusBar, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -13,8 +13,9 @@ export default function App() {
     setEnteredGoal(enteredText)
   }
   function goalSubmitHandler() {
-    setCourseGoals([...courseGoals, enteredGoal])
-
+    setCourseGoals(currentGoals => [
+      ...currentGoals,
+      { key: Math.random().toString(), value: enteredGoal }])
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -23,9 +24,14 @@ export default function App() {
 
       <Button title="click me" onPress={
         goalSubmitHandler} />
-      <ScrollView>
-        {courseGoals.map((goals) => <Text>{goals} </Text>)}
-      </ScrollView>
+
+      <FlatList
+        keyExtractor={(item, index) => item.key}
+        data={courseGoals}
+        renderItem={itemData => (
+          <View>
+            <Text>{itemData.item.value} </Text>
+          </View>)} />
     </SafeAreaView>
   );
 }
